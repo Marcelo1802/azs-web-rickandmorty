@@ -22,6 +22,27 @@ export const GET_ALL_EPISODES = gql`
 `;
 
 /**
+ * Query para buscar episódios pelo nome
+ */
+export const SEARCH_EPISODES_BY_NAME = gql`
+  query SearchEpisodesByName($name: String!) {
+    episodes(filter: { name: $name }) {
+      results {
+        id
+        name
+        air_date
+        episode
+        created
+      }
+      info {
+        count
+        pages
+      }
+    }
+  }
+`;
+
+/**
  * Query para obter um episódio específico por ID
  */
 export const GET_EPISODE = gql`

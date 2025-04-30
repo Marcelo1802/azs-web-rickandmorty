@@ -12,7 +12,10 @@ type EpisodeCardProps = {
  */
 export const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
   const handlePress = () => {
-    router.push(`/episode/${episode.id}`);
+    router.push({
+      pathname: "/episode/[id]",
+      params: { id: episode.id }
+    });
   };
 
   return (

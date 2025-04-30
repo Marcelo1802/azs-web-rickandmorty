@@ -1,24 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Stack } from 'expo-router';
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 
-import { GET_ALL_EPISODES } from '../services/queries';
+import { GET_ALL_EPISODES, SEARCH_EPISODES_BY_NAME } from '../services/queries';
 import { EpisodesResponse, Episode } from '../types/apiTypes';
 import { EpisodeCard } from '../components/EpisodeCard';
+import { SearchBar } from '../components/SearchBar';
 
 /**
  * HomeScreen - Tela principal que lista todos os episódios
  */
 const HomeScreen = () => {
-  // Buscar os dados dos episódios
-  const { loading, error, data } = useQuery<EpisodesResponse>(GET_ALL_EPISODES);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
+
+  // Buscar todos os episódios
+  const { loading: loadingAll, error: errorAll, data: allData } = useQuery<EpisodesResponse>(GET_ALL_EPISODES);
+
+  // Configurar query de busca para ser executada quando solicitado
+  const [searchEpisodes, { loading: loadingSearch, error: errorSearch, data: searchData }] = 
+    useLazyQuery<EpisodesResponse>(SEARCH_EPISODES_BY_NAME);
+
+  // Atualizar a lista de episódios com base nos dados retornados
+  useEffect(() => {
+    if (searchTerm && searchData) {
+      setEpisodes(searchData.episodes.results);
+    } else if (allData) {
+      setEpisodes(allData.episodes.results);
+    }
+  }, [allData, searchData, searchTerm]);
+
+  // Função para lidar com a pesquisa
+  const handleSearch = (text: string) => {
+    setSearchTerm(text);
+    if (text.trim()) {
+      searchEpisodes({ variables: { name: text } });
+    }
+  };
 
   // Função para renderizar cada item da lista
   const renderItem = ({ item }: { item: Episode }) => (
     <EpisodeCard episode={item} />
   );
+
+  // Estado de carregamento combinado
+  const isLoading = loadingAll || loadingSearch;
+  
+  // Estado de erro combinado
+  const error = errorAll || errorSearch;
 
   return (
     <>
@@ -32,7 +63,12 @@ const HomeScreen = () => {
       <SafeAreaView style={styles.container}>
         <StatusBar style="light" />
         
-        {loading ? (
+        <SearchBar 
+          onSearch={handleSearch} 
+          placeholder="Buscar episódio por nome..." 
+        />
+        
+        {isLoading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color="#62A4AB" />
             <Text style={styles.loadingText}>Carregando episódios...</Text>
@@ -42,9 +78,15 @@ const HomeScreen = () => {
             <Text style={styles.errorText}>Erro ao carregar os episódios</Text>
             <Text style={styles.errorDetails}>{error.message}</Text>
           </View>
+        ) : episodes.length === 0 && searchTerm ? (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>
+              Nenhum episódio encontrado para "{searchTerm}"
+            </Text>
+          </View>
         ) : (
           <FlatList
-            data={data?.episodes.results}
+            data={episodes}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.listContainer}
@@ -61,7 +103,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   listContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
   loadingContainer: {
     flex: 1,
@@ -87,6 +130,17 @@ const styles = StyleSheet.create({
   },
   errorDetails: {
     fontSize: 14,
+    color: '#CCCCCC',
+    textAlign: 'center',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  emptyText: {
+    fontSize: 16,
     color: '#CCCCCC',
     textAlign: 'center',
   },
