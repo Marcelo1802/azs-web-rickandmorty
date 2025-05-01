@@ -30,12 +30,12 @@ export default function TabLayout() {
         options={{
           title: 'Episódios',
           tabBarIcon: ({ focused }) => (
-            <IconSymbol size={28} name="tv.fill" color={focused ? 'red' : 'gray'} />
+            <IconSymbol size={28} name="tv.fill" color={focused ? 'green' : 'gray'} />
           ),
           tabBarLabel: ({ focused }) => (
             <Text
               style={{
-                color: focused ? 'red' : 'gray',
+                color: focused ? 'green' : 'gray',
                 fontSize: focused ? 14 : 12, 
                 fontWeight: focused ? 'bold' : 'normal', 
                 marginTop: 4,
@@ -50,12 +50,12 @@ export default function TabLayout() {
         options={{
           title: 'Personagens',
           tabBarIcon: ({ focused }) => (
-            <IconSymbol size={28} name="person.fill" color={focused ? 'red' : 'gray'} />
+            <IconSymbol size={28} name="person.fill" color={focused ? 'green' : 'gray'} />
           ),
           tabBarLabel: ({ focused }) => (
             <Text
               style={{
-                color: focused ? 'red' : 'gray',
+                color: focused ? 'green' : 'gray',
                 fontSize: focused ? 14 : 12,
                 fontWeight: focused ? 'bold' : 'normal', 
                 marginTop: 4,
@@ -70,12 +70,12 @@ export default function TabLayout() {
         options={{
           title: 'Favorites',
           tabBarIcon: ({ focused }) => (
-            <IconSymbol size={28} name="heart.fill" color={focused ? 'red' : 'gray'} />
+            <IconSymbol size={28} name="heart.fill" color={focused ? 'green' : 'gray'} />
           ),
           tabBarLabel: ({ focused }) => (
             <Text
               style={{
-                color: focused ? 'red' : 'gray',
+                color: focused ? 'green' : 'gray',
                 fontSize: focused ? 14 : 12,
                 fontWeight: focused ? 'bold' : 'normal', 
                 marginTop: 4,

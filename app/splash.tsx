@@ -10,7 +10,7 @@ const { width } = Dimensions.get('window');
 // Constantes da UI
 const UI = {
   IMAGES: {
-    MAIN_IMAGE: require('../assets/images/rick-and-morty.webp'),
+    MAIN_IMAGE: require('../assets/images/rick-and-morty-and-AZShip.png'),
   },
   TEXTS: {
     TITLE: 'AZShip - Rick and Morty',
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   homeText: {
     fontSize: Math.min(width * 0.08, 36),
     fontWeight: 'bold',
-    color: '#fff',
+    color: 'green',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 5,
