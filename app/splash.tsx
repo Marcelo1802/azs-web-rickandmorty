@@ -10,10 +10,10 @@ const { width } = Dimensions.get('window');
 // Constantes da UI
 const UI = {
   IMAGES: {
-    MAIN_IMAGE: require('../assets/images/rick-and-morty-and-AZShip.png'),
+    MAIN_IMAGE: require('../assets/images/AZShip-and-rick-and-morty.png'),
   },
   TEXTS: {
-    TITLE: 'AZShip - Rick and Morty',
+    TITLE: '@ marcelo guimaraes',
   },
   TIMING: {
     SPLASH_DURATION: 2000, // 2 segundos
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   homeText: {
-    fontSize: Math.min(width * 0.08, 36),
+    fontSize: Math.min(width * 0.08, 15),
     fontWeight: 'bold',
     color: 'green',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
