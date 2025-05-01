@@ -4,10 +4,10 @@ import { StatusBar } from 'expo-status-bar';
 import { Stack } from 'expo-router';
 import { useQuery, useLazyQuery } from '@apollo/client';
 
-import { GET_ALL_EPISODES, SEARCH_EPISODES_BY_NAME } from '../services/queries';
-import { EpisodesResponse, Episode } from '../types/apiTypes';
-import { EpisodeCard } from '../components/EpisodeCard';
-import { SearchBar } from '../components/SearchBar';
+import { GET_ALL_EPISODES, SEARCH_EPISODES_BY_NAME } from '../../services/queries';
+import { EpisodesResponse, Episode } from '../../types/apiTypes';
+import { EpisodeCard } from '../../components/EpisodeCard';
+import { SearchBar } from '../../components/SearchBar';
 
 /**
  * HomeScreen - Tela principal que lista todos os episódios
