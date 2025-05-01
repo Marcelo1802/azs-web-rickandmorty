@@ -35,7 +35,7 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <FavoritesProvider>
           <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "Menu" }} />
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar style="auto" />
