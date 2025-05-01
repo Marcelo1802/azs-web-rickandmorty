@@ -46,6 +46,26 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="characters"
+        options={{
+          title: 'Personagens',
+          tabBarIcon: ({ focused }) => (
+            <IconSymbol size={28} name="person.fill" color={focused ? 'red' : 'gray'} />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                color: focused ? 'red' : 'gray',
+                fontSize: focused ? 14 : 12,
+                fontWeight: focused ? 'bold' : 'normal', 
+                marginTop: 4,
+              }}>
+              Personagens
+            </Text>
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="favorites"
         options={{
           title: 'Favorites',

@@ -15,6 +15,8 @@ export interface Episode {
 export interface PaginationInfo {
   count: number;
   pages: number;
+  next: number | null;
+  prev: number | null;
 }
 
 /**
@@ -35,7 +37,16 @@ export interface Character {
   name: string;
   status: string;
   species: string;
+  type?: string;
+  gender?: string;
+  origin?: {
+    name: string;
+  };
+  location?: {
+    name: string;
+  };
   image: string;
+  created?: string;
 }
 
 /**
@@ -44,5 +55,15 @@ export interface Character {
 export interface EpisodeResponse {
   episode: Episode & {
     characters: Character[];
+  };
+}
+
+/**
+ * Interface para a resposta da query de personagens
+ */
+export interface CharactersResponse {
+  characters: {
+    results: Character[];
+    info: PaginationInfo;
   };
 } 

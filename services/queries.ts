@@ -62,4 +62,68 @@ export const GET_EPISODE = gql`
       created
     }
   }
-`; 
+`;
+
+/**
+ * Query para obter personagens com paginação
+ */
+export const GET_ALL_CHARACTERS = gql`
+  query GetAllCharacters($page: Int) {
+    characters(page: $page) {
+      results {
+        id
+        name
+        status
+        species
+        type
+        gender
+        origin {
+          name
+        }
+        location {
+          name
+        }
+        image
+        created
+      }
+      info {
+        count
+        pages
+        next
+        prev
+      }
+    }
+  }
+`;
+
+/**
+ * Query para buscar personagens pelo nome
+ */
+export const SEARCH_CHARACTERS_BY_NAME = gql`
+  query SearchCharactersByName($name: String!, $page: Int) {
+    characters(filter: { name: $name }, page: $page) {
+      results {
+        id
+        name
+        status
+        species
+        type
+        gender
+        origin {
+          name
+        }
+        location {
+          name
+        }
+        image
+        created
+      }
+      info {
+        count
+        pages
+        next
+        prev
+      }
+    }
+  }
+`;
