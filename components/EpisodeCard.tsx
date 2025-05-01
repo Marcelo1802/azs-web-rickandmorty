@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import { Episode } from '../types/apiTypes';
+import { MaterialIcons } from '@expo/vector-icons';
 
 type EpisodeCardProps = {
   episode: Episode;
@@ -11,11 +12,18 @@ type EpisodeCardProps = {
  * Componente que exibe informações de um episódio em um card
  */
 export const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const handlePress = () => {
     router.push({
       pathname: "/episode/[id]",
       params: { id: episode.id }
     });
+  };
+
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    // Aqui você pode adicionar lógica para atualizar a lista de favoritos globalmente
   };
 
   return (
@@ -25,6 +33,11 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
         <Text style={styles.airDate}>{episode.air_date}</Text>
       </View>
       <Text style={styles.title}>{episode.name}</Text>
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={toggleFavorite} style={styles.favoriteButton}>
+          <MaterialIcons name="favorite" size={24} color={isFavorite ? 'red' : 'gray'} />
+        </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -59,5 +72,13 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 8,
+  },
+  favoriteButton: {
+    // Remover a posição absoluta para alinhar na parte inferior
   },
 }); 
