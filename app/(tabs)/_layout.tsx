@@ -30,7 +30,7 @@ export default function TabLayout() {
         options={{
           title: 'Episódios',
           tabBarIcon: ({ focused }) => (
-            <IconSymbol size={28} name="film.fill" color={focused ? 'red' : 'gray'} />
+            <IconSymbol size={28} name="tv.fill" color={focused ? 'red' : 'gray'} />
           ),
           tabBarLabel: ({ focused }) => (
             <Text

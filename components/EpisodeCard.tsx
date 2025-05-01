@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import { Episode } from '../types/apiTypes';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useFavorites } from './FavoritesContext';
 
 type EpisodeCardProps = {
   episode: Episode;
@@ -12,18 +13,14 @@ type EpisodeCardProps = {
  * Componente que exibe informações de um episódio em um card
  */
 export const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { favorites, toggleFavorite } = useFavorites();
+  const isFavorite = favorites.some((fav) => fav.id === episode.id);
 
   const handlePress = () => {
     router.push({
       pathname: "/episode/[id]",
       params: { id: episode.id }
     });
-  };
-
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-    // Aqui você pode adicionar lógica para atualizar a lista de favoritos globalmente
   };
 
   return (
@@ -34,7 +31,7 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({ episode }) => {
       </View>
       <Text style={styles.title}>{episode.name}</Text>
       <View style={styles.footer}>
-        <TouchableOpacity onPress={toggleFavorite} style={styles.favoriteButton}>
+        <TouchableOpacity onPress={() => toggleFavorite(episode)} style={styles.favoriteButton}>
           <MaterialIcons name="favorite" size={24} color={isFavorite ? 'red' : 'gray'} />
         </TouchableOpacity>
       </View>

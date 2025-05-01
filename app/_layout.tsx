@@ -9,6 +9,7 @@ import { ApolloProvider } from '@apollo/client';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import apolloClient from '../services/apollo';
+import { FavoritesProvider } from '../components/FavoritesContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -32,11 +33,13 @@ export default function RootLayout() {
   return (
     <ApolloProvider client={apolloClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
+        <FavoritesProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </FavoritesProvider>
       </ThemeProvider>
     </ApolloProvider>
   );
