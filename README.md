@@ -1,50 +1,101 @@
-# Welcome to your Expo app 👋
+# Desafio AZShip - Rick and Morty
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo mobile desenvolvido como parte do desafio da AZShip, utilizando a API Rick and Morty para exibir informações sobre episódios e personagens da série.
 
-## Get started
+![Logo do Projeto](./assets/images/AZShip-and-rick-and-morty.png)
 
-1. Install dependencies
+## Tecnologias Utilizadas
 
-   ```bash
-   npm install
-   ```
+- **React Native / Expo**: Framework para desenvolvimento mobile
+- **TypeScript**: Superset de JavaScript com tipagem estática
+- **Apollo Client**: Cliente GraphQL para consumo da API
+- **Expo Router**: Sistema de roteamento baseado em arquivos
+- **React Navigation**: Navegação entre telas
+- **Expo Vector Icons**: Biblioteca de ícones
 
-2. Start the app
+## Funcionalidades Implementadas
 
-   ```bash
-    npx expo start
-   ```
+### Episódios
 
-In the output, you'll find options to open the app in a
+- **Listar todos os episódios**:
+  - Número do episódio
+  - Nome
+  - Data em que foi ao ar
+  - Botão para favoritar/desfavoritar
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **Detalhes do episódio**:
+  - Número do episódio
+  - Nome
+  - Data em que foi ao ar
+  - Lista de personagens que aparecem no episódio
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Busca de episódios**:
+  - Busca por nome do episódio
+  - Exibição de resultados em tempo real
 
-## Get a fresh project
+### Personagens
 
-When you're ready, run:
+- **Listar todos os personagens**:
+  - Nome
+  - Status (vivo, morto, desconhecido)
+  - Espécie
+  - Origem
+  - Localização atual
+  - Imagem do personagem
 
-```bash
-npm run reset-project
+- **Paginação infinita**:
+  - Carregamento automático de mais personagens ao rolar a tela
+
+### Favoritos
+
+- **Favoritar/Desfavoritar episódios**:
+  - Marcar episódios como favoritos
+  - Botão de favorito em cada card de episódio
+
+- **Lista de favoritos**:
+  - Visualização de todos os episódios marcados como favoritos
+  - Remoção de favoritos diretamente da lista
+
+## API Utilizada
+
+O aplicativo consome a API GraphQL Rick and Morty, disponível em:
+```
+https://rickandmortyapi.com/graphql
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Esta API fornece dados completos sobre:
+- Episódios da série
+- Personagens
+- Localizações
 
-## Learn more
+## Estrutura do Projeto
 
-To learn more about developing your project with Expo, look at the following resources:
+- **/app**: Telas e rotas da aplicação (usando Expo Router)
+- **/components**: Componentes reutilizáveis
+- **/services**: Configuração do Apollo Client e queries GraphQL
+- **/types**: Tipagens TypeScript para a API
+- **/assets**: Imagens e recursos estáticos
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Funcionalidades Adicionais
 
-## Join the community
+- **Splash Screen personalizada**
+- **Tema escuro** para melhor experiência visual
+- **Cards com estilo único** para episódios e personagens
+- **Interface responsiva** adaptada para diferentes tamanhos de tela
 
-Join our community of developers creating universal apps.
+## Como Executar o Projeto
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. Clone o repositório
+2. Instale as dependências:
+```bash
+npm install
+```
+3. Inicie o servidor de desenvolvimento:
+```bash
+npm start
+```
+4. Escaneie o QR Code com o aplicativo Expo Go ou execute em um emulador.
+
+## Desenvolvido por
+
+@ marcelo guimaraes
