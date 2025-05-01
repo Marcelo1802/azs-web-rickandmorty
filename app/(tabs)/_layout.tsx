@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -20,24 +20,49 @@ export default function TabLayout() {
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
           },
           default: {},
         }),
       }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Episódios',
+          tabBarIcon: ({ focused }) => (
+            <IconSymbol size={28} name="film.fill" color={focused ? 'red' : 'gray'} />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                color: focused ? 'red' : 'gray',
+                fontSize: focused ? 14 : 12, 
+                fontWeight: focused ? 'bold' : 'normal', 
+                marginTop: 4,
+              }}>
+              Episódios
+            </Text>
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="favorites"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Favorites',
+          tabBarIcon: ({ focused }) => (
+            <IconSymbol size={28} name="heart.fill" color={focused ? 'red' : 'gray'} />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                color: focused ? 'red' : 'gray',
+                fontSize: focused ? 14 : 12,
+                fontWeight: focused ? 'bold' : 'normal', 
+                marginTop: 4,
+              }}>
+              Favorites
+            </Text>
+          ),
         }}
       />
     </Tabs>
